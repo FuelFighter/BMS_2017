@@ -1,0 +1,3 @@
+[submodule "BMS_2017/UniversalModuleDrivers"]
+	path = BMS_2017/UniversalModuleDrivers
+	url = https://github.com/FuelFighter/UniversalModuleDrivers.git
