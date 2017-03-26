@@ -120,11 +120,40 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BmsDrivers\battery.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BmsDrivers\current_measure.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BmsDrivers\LTC6804\ltc6804.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BmsDrivers\LTC6804\ltc6804.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BmsDrivers\LTC6804\ltc6804_definitions.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BmsDrivers\LTC6804\pec.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BmsDrivers\LTC6804\pec.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BmsDrivers\sdc_control.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BmsDrivers\voltage_measure.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="BmsDrivers" />
+    <Folder Include="BmsDrivers\LTC6804" />
     <Folder Include="UniversalModuleDrivers\" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
