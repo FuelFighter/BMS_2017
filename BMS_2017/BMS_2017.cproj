@@ -150,6 +150,42 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="UniversalModuleDrivers\can.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UniversalModuleDrivers\can.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UniversalModuleDrivers\pid.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UniversalModuleDrivers\pid.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UniversalModuleDrivers\pwm.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UniversalModuleDrivers\pwm.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UniversalModuleDrivers\rgbled.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UniversalModuleDrivers\rgbled.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UniversalModuleDrivers\uart.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UniversalModuleDrivers\uart.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UniversalModuleDrivers\usbdb.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UniversalModuleDrivers\usbdb.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BmsDrivers" />
