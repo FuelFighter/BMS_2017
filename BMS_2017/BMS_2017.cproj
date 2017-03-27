@@ -135,10 +135,10 @@
     <Compile Include="BmsDrivers\LTC6804\ltc6804_definitions.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="BmsDrivers\LTC6804\pec.c">
+    <Compile Include="BmsDrivers\LTC6804\ltc6804_pec.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="BmsDrivers\LTC6804\pec.h">
+    <Compile Include="BmsDrivers\LTC6804\ltc6804_pec.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="BmsDrivers\sdc_control.h">

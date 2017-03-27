@@ -8,7 +8,7 @@
 #include "ltc6804.h"
 #include "ltc6804_pec.h"
 #include "ltc6804_definitions.h"
-#include "../spi.h"
+#include "../UniversalModuleDrivers/spi.h"
 
 
 void ltc6804_wakeUp ( void )
