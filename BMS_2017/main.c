@@ -11,28 +11,15 @@
 
 #include "UniversalModuleDrivers/can.h"
 
+
 int main(void)
 {
-	can_init();
-	sei();
-	
-	CanMessage_t msg;
-	msg.length = 8;
-	msg.id = 0x440;
-
     while (1) {
-	    msg.data[0] = 0xCA;
-	    msg.data[1] = 0xFE;
-	    msg.data[2] = 0xBA;
-	    msg.data[3] = 0xBE;
-	    msg.data[4] = 0x00;
-	    msg.data[5] = 0xB0;
-	    msg.data[6] = 0x0B;
-	    msg.data[7] = 0x1E;
-
-		can_send_message(&msg);
-
-		_delay_ms(20);
+		battery_measure_cells();
+		battery_measure_temperature_and_current();
+		hvm_measure();
+		
+		fsm_update();
     }
 }
 
