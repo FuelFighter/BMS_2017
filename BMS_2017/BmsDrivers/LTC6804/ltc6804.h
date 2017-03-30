@@ -12,10 +12,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define NUMBER_OF_CELLS 12
 
-#define LTC6804_T_REFUP 5
-#define LTC6804_T_CYCLE 3
+#define LTC_T_REFUP 5
+#define LTC_T_CYCLE_US 2480
 
 
 typedef enum {
@@ -24,7 +23,7 @@ typedef enum {
 	RegisterGroup_CELLB,
 	RegisterGroup_CELLC,
 	RegisterGroup_CELLD,
-	ReigsterGroup_AUXA,
+	RegisterGroup_AUXA,
 	RegisterGroup_AUXB,
 	RegisterGroup_STATA,
 	RegisterGroup_STATB
@@ -95,28 +94,10 @@ typedef union {
 	} config;
 
 	struct {
-		uint16_t cellVoltage1;
-		uint16_t cellVoltage2;
-		uint16_t cellVoltage3;
-	} cvA;
-
-	struct {
-		uint16_t cellVoltage4;
-		uint16_t cellVoltage5;
-		uint16_t cellVoltage6;
-	} cvB;
-
-	struct {
-		uint16_t cellVoltage7;
-		uint16_t cellVoltage8;
-		uint16_t cellVoltage9;
-	} cvC;
-
-	struct {
-		uint16_t cellVoltage10;
-		uint16_t cellVoltage11;
-		uint16_t cellVoltage12;
-	} cvD;
+		uint16_t cellVoltage0_3_6_9;
+		uint16_t cellVoltage1_4_7_10;
+		uint16_t cellVoltage2_5_8_11;
+	} cv;
 
 	struct {
 		uint16_t gpioVoltage1;
@@ -149,11 +130,11 @@ typedef union {
 } ltc_RegisterData_t;
 
 
-ltc_ErrorCode_t ltc6804_sendCommand ( ltc_Command_t command );
+ltc_ErrorCode_t ltc_sendCommand ( ltc_Command_t command );
 
-ltc_ErrorCode_t ltc6804_readRegisterGroup ( ltc_RegisterGroup_t registerGroup, ltc_RegisterData_t* registerData, uint16_t* com_errors );
+ltc_ErrorCode_t ltc_readRegisterGroup ( ltc_RegisterGroup_t registerGroup, ltc_RegisterData_t* registerData, uint16_t* com_errors );
 
-ltc_ErrorCode_t ltc6804_writeConfigurationRegister ( ltc_RegisterData_t* configurationRegister );
+ltc_ErrorCode_t ltc_writeConfigurationRegister ( ltc_RegisterData_t* configurationRegister );
 
 
 #endif /* LTC6804_H_ */

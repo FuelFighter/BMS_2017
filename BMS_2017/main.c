@@ -9,13 +9,12 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
-#include "UniversalModuleDrivers/can.h"
 
 
 int main(void)
 {
     while (1) {
-		battery_measure_cells();
+		battery_measure_cell_voltages();
 		battery_measure_temperature_and_current();
 		hvm_measure();
 		

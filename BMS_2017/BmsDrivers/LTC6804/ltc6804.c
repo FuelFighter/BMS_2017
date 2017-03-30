@@ -12,12 +12,13 @@
 #include <util/delay.h>
 #include <stdint.h>
 
-void ltc6804_wakeUp ( void ) {
+
+static void ltc_wakeUp ( void ) {
 	spi_trancieve(NULL, NULL, 1, true);
 	_delay_us(T_WAKE_US);
 }
 
-ltc_ErrorCode_t ltc6804_sendCommand ( ltc_Command_t command ) {
+ltc_ErrorCode_t ltc_sendCommand ( ltc_Command_t command ) {
 	uint32_t cmd_pec;
 	
 	switch (command) {
@@ -60,13 +61,13 @@ ltc_ErrorCode_t ltc6804_sendCommand ( ltc_Command_t command ) {
 	cmd_buffer[2] = (cmd_pec >> 8) & 0xFF;
 	cmd_buffer[3] = (cmd_pec >> 0) & 0xFF;
 	
-	ltc6804_wakeUp();
+	ltc_wakeUp();
 	spi_trancieve(cmd_buffer, NULL, 4, true);
 	
 	return NO_ERROR;
 }
 	
-ltc_ErrorCode_t ltc6804_readRegisterGroup ( ltc_RegisterGroup_t registerGroup, ltc_RegisterData_t* registerData, uint16_t* com_errors ) {
+ltc_ErrorCode_t ltc_readRegisterGroup ( ltc_RegisterGroup_t registerGroup, ltc_RegisterData_t* registerData, uint16_t* com_errors ) {
 	uint32_t cmd_pec;
 	
 	switch (registerGroup) {
@@ -107,7 +108,7 @@ ltc_ErrorCode_t ltc6804_readRegisterGroup ( ltc_RegisterGroup_t registerGroup, l
 	cmd_buffer[3] = (cmd_pec >> 0) & 0xFF;
 
 	// Do transmission
-	ltc6804_wakeUp();
+	ltc_wakeUp();
 	spi_trancieve_tx_then_rx(cmd_buffer, COMMAND_LENGTH + PEC_LENGTH, registerData->rawData, REGISTER_DATA_LENGTH + PEC_LENGTH);
 
 	// Check pec
@@ -121,7 +122,7 @@ ltc_ErrorCode_t ltc6804_readRegisterGroup ( ltc_RegisterGroup_t registerGroup, l
 	return NO_ERROR;
 }
 
-ltc_ErrorCode_t ltc6804_writeConfigurationRegister ( ltc_RegisterData_t* registerData )
+ltc_ErrorCode_t ltc_writeConfigurationRegister ( ltc_RegisterData_t* registerData )
 {
 	// Setup command
 	uint8_t cmd_buffer[4];
@@ -136,7 +137,7 @@ ltc_ErrorCode_t ltc6804_writeConfigurationRegister ( ltc_RegisterData_t* registe
 	registerData->rawData[7] = (pec >> 0) & 0xFF;
 	
 	// Do transmission
-	ltc6804_wakeUp();
+	ltc_wakeUp();
 	spi_trancieve(cmd_buffer, NULL, COMMAND_LENGTH + PEC_LENGTH, false);
 	spi_trancieve(registerData->rawData, NULL, REGISTER_DATA_LENGTH + PEC_LENGTH, true);
 	
