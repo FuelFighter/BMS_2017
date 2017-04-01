@@ -13,12 +13,12 @@
 #include <stdint.h>
 
 
-static void ltc_wakeUp ( void ) {
+static void ltc_wakeUp () {
 	spi_trancieve(NULL, NULL, 1, true);
 	_delay_us(T_WAKE_US);
 }
 
-ltc_ErrorCode_t ltc_sendCommand ( ltc_Command_t command ) {
+ltc_ErrorCode_t ltc_sendCommand (ltc_Command_t command) {
 	uint32_t cmd_pec;
 	
 	switch (command) {
@@ -67,7 +67,7 @@ ltc_ErrorCode_t ltc_sendCommand ( ltc_Command_t command ) {
 	return NO_ERROR;
 }
 	
-ltc_ErrorCode_t ltc_readRegisterGroup ( ltc_RegisterGroup_t registerGroup, ltc_RegisterData_t* registerData, uint16_t* com_errors ) {
+ltc_ErrorCode_t ltc_readRegisterGroup (ltc_RegisterGroup_t registerGroup, ltc_RegisterData_t* registerData) {
 	uint32_t cmd_pec;
 	
 	switch (registerGroup) {
@@ -86,7 +86,7 @@ ltc_ErrorCode_t ltc_readRegisterGroup ( ltc_RegisterGroup_t registerGroup, ltc_R
 		case RegisterGroup_CELLD:
 			cmd_pec = (RDCVD_CMD << 16) | RDCVD_PEC;
 			break;
-		case ReigsterGroup_AUXA:
+		case RegisterGroup_AUXA:
 			cmd_pec = (RDAUXA_CMD << 16) | RDAUXA_PEC;
 			break;
 		case RegisterGroup_AUXB:
@@ -122,7 +122,7 @@ ltc_ErrorCode_t ltc_readRegisterGroup ( ltc_RegisterGroup_t registerGroup, ltc_R
 	return NO_ERROR;
 }
 
-ltc_ErrorCode_t ltc_writeConfigurationRegister ( ltc_RegisterData_t* registerData )
+ltc_ErrorCode_t ltc_writeConfigurationRegister (ltc_RegisterData_t* registerData)
 {
 	// Setup command
 	uint8_t cmd_buffer[4];

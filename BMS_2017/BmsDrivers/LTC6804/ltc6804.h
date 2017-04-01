@@ -130,11 +130,11 @@ typedef union {
 } ltc_RegisterData_t;
 
 
-ltc_ErrorCode_t ltc_sendCommand ( ltc_Command_t command );
+ltc_ErrorCode_t ltc_sendCommand (ltc_Command_t command);
 
-ltc_ErrorCode_t ltc_readRegisterGroup ( ltc_RegisterGroup_t registerGroup, ltc_RegisterData_t* registerData, uint16_t* com_errors );
+ltc_ErrorCode_t ltc_readRegisterGroup (ltc_RegisterGroup_t registerGroup, ltc_RegisterData_t* registerData);
 
-ltc_ErrorCode_t ltc_writeConfigurationRegister ( ltc_RegisterData_t* configurationRegister );
+ltc_ErrorCode_t ltc_writeConfigurationRegister (ltc_RegisterData_t* configurationRegister);
 
 
 #endif /* LTC6804_H_ */

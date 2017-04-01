@@ -6,6 +6,13 @@
  */ 
 
 #include "fsm.h"
+#include "limits.h"
+#include "error_flags.h"
+#include "BmsDrivers/hvm.h"
+#include "BmsDrivers/battery.h"
+#include "BmsDrivers/sdc_control.h"
+#include "BmsDrivers/precharge_timer.h"
+#include "UniversalModuleDrivers/rgbled.h"
 
 
 typedef enum {
@@ -14,6 +21,7 @@ typedef enum {
 	STATE_BATTERY_ACTIVE,
 	STATE_ERROR
 } fsm_state_t;
+
 
 static fsm_state_t fsm_state;
 
@@ -39,7 +47,7 @@ static void set_state(fsm_state_t new_state) {
 
 	if (new_state == STATE_BATTERY_ACTIVE) {
 		rgbled_turn_off(LED_ALL);
-		sdc_close_relays();
+		sdc_close_positive_relay();
 		sdc_open_precharge_relay();
 		rgbled_turn_on(LED_GREEN);
 	}
@@ -60,10 +68,10 @@ void fsm_update() {
 			break;
 		}
 		case STATE_PRECHARGING: {
-			if (precharge_timer_elapsed_ms() > PRECHARGE_MINIMUM_TIME_MS && 
-				data_get_output_voltage() > data_get_battery_voltage() * PRECHARGE_MINIMUM_RATIO) {
+			if (precharge_timer_elapsed_ms() > LIMITS_PRECHARGE_TIME_MIN && 
+				hvm_get_voltage() > battery_last_data.total_voltage * LIMITS_PRECHARGE_RATIO_MIN) {
 				set_state(STATE_BATTERY_ACTIVE);
-			} else if (precharge_timer_elapsed_ms() > PRECHARGE_MAXIMUM_TIME_MS) {
+			} else if (precharge_timer_elapsed_ms() > LIMITS_PRECHARGE_TIME_MAX) {
 				error_flags_set(ERROR_FLAG_PRECHARGE_TIMEOUT);
 				set_state(STATE_ERROR);
 			}

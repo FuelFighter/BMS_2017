@@ -122,7 +122,13 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BmsDrivers\battery.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="BmsDrivers\battery.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BmsDrivers\hvm.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="BmsDrivers\hvm.h">
@@ -143,13 +149,31 @@
     <Compile Include="BmsDrivers\LTC6804\ltc6804_pec.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="BmsDrivers\precharge_timer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BmsDrivers\precharge_timer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="BmsDrivers\sdc_control.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="BmsDrivers\sdc_control.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="error_flags.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="error_flags.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="fsm.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="fsm.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="limits.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">

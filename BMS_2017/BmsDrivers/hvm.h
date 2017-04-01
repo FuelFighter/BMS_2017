@@ -9,8 +9,11 @@
 #ifndef HVM_H_
 #define HVM_H_
 
+#include <stdint.h>
 
 void hvm_measure();
+
+uint16_t hvm_get_voltage();
 
 
 #endif /* HVM_H_ */
