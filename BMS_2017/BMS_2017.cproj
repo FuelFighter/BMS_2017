@@ -179,6 +179,12 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="UniversalModuleDrivers\adc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UniversalModuleDrivers\adc.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="UniversalModuleDrivers\can.c">
       <SubType>compile</SubType>
     </Compile>

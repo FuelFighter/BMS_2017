@@ -56,11 +56,11 @@ static void battery_update_temperature_metadata() {
 	battery_last_data.avg_temperature = acc / NUMBER_OF_THERMISTORS;
 }
 
-static uint16_t battery_convert_temperature() {
+static uint16_t battery_convert_temperature(uint16_t val) {
 	return 0xCAFE; // TODO
 }
 
-static uint16_t battery_convert_current() {
+static uint16_t battery_convert_current(uint16_t val) {
 	return 0xBABE; // TODO
 }
 
