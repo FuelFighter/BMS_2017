@@ -11,6 +11,8 @@
 
 #include <stdint.h>
 
+void hvm_init();
+
 void hvm_measure();
 
 uint16_t hvm_get_voltage();
