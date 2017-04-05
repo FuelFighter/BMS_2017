@@ -9,6 +9,7 @@
 #ifndef ERROR_FLAGS_H_
 #define ERROR_FLAGS_H_
 
+#include <stdint.h>
 #include <stdbool.h>
 
 typedef enum {
@@ -23,5 +24,7 @@ typedef enum {
 void error_flags_set (error_flag_t flag);
 
 bool error_flags_is_critical();
+
+uint16_t error_flags_get_bitfield();
 
 #endif /* ERROR_FLAGS_H_ */

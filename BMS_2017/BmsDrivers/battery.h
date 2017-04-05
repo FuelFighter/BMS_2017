@@ -26,9 +26,9 @@ typedef struct {
 	uint16_t total_voltage;
 
 	// Unit: mA (1 milliampere)
-	uint16_t current;
+	int16_t current;
 
-	// Unit: d°C (1 decidegree celsius)
+	// Unit: 0.1 °C (1 decidegree celsius)
 	uint16_t temperature[NUMBER_OF_THERMISTORS];
 	uint16_t max_temperature;
 	uint16_t min_temperature;
@@ -40,5 +40,7 @@ extern battery_t battery_last_data;
 bool battery_measure_cell_voltages();
 
 bool battery_measure_temperature_and_current();
+
+bool battery_write_configuration();
 
 #endif /* BATTERY_H_ */

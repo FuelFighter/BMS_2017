@@ -22,3 +22,7 @@ bool error_flags_is_critical() {
 		return false;
 	}
 }
+
+uint16_t error_flags_get_bitfield() {
+	return error_flags;
+}
