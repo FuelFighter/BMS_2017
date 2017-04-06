@@ -15,9 +15,9 @@
 #define RELAY_PRECHARGE_PIN 4
 #define RELAY_SDC_PIN 5
 
-#define SDC_ACTIVE_PIN_REG PINF
-#define SDC_ACTIVE_DDR DDRF
-#define SDC_ACTIVE_PIN 2
+#define SDC_ACTIVE_PIN_REG PINB
+#define SDC_ACTIVE_DDR DDRB
+#define SDC_ACTIVE_PIN 4
 
 void sdc_init() {
 	// Set relay control pins to output, and turn on only the sdc relay.
