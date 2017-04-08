@@ -65,7 +65,6 @@ static int16_t battery_convert_temperature(uint16_t val) {
 	int32_t x = (int32_t)val;
 	return (int16_t)((x * ((x * (((x * -1092) / 1000) + 53300)) / 100000 - 12000)) / 100000 + 1219);
 }
-}
 
 static int16_t battery_convert_current(uint16_t val) {
 	return (val - 25000) / 40;
