@@ -29,10 +29,10 @@ typedef struct {
 	int16_t current;
 
 	// Unit: 0.1 °C (1 decidegree celsius)
-	uint16_t temperature[NUMBER_OF_THERMISTORS];
-	uint16_t max_temperature;
-	uint16_t min_temperature;
-	uint16_t avg_temperature;
+	int16_t temperature[NUMBER_OF_THERMISTORS];
+	int16_t max_temperature;
+	int16_t min_temperature;
+	int16_t avg_temperature;
 } battery_t;
 
 extern battery_t battery_last_data;

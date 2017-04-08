@@ -41,7 +41,7 @@ static void battery_update_cell_metadata() {
 static void battery_update_temperature_metadata() {
 	battery_last_data.min_temperature = UINT16_MAX;
 	battery_last_data.max_temperature = 0;
-	uint16_t acc = 0;
+	int16_t acc = 0;
 
 	for (int t = 0; t < NUMBER_OF_THERMISTORS; t++) {
 		acc += battery_last_data.temperature[t];
@@ -58,12 +58,17 @@ static void battery_update_temperature_metadata() {
 	battery_last_data.avg_temperature = acc / NUMBER_OF_THERMISTORS;
 }
 
-static uint16_t battery_convert_temperature(uint16_t val) {
-	return val; // TODO
+static int16_t battery_convert_temperature(uint16_t val) {
+	// Uses a third degree polynomial fitted to the theoretical curve.
+	// Calculation is carefully set up to avoid loss of precision and integer overflow.
+	// This is accurate to 0.1 degrees between 0 and 80 degrees Celsius.
+	int32_t x = (int32_t)val;
+	return (int16_t)((x * ((x * (((x * -1092) / 1000) + 53300)) / 100000 - 12000)) / 100000 + 1219);
+}
 }
 
 static int16_t battery_convert_current(uint16_t val) {
-	return 0x00CA; // TODO
+	return (val - 25000) / 40;
 }
 
 bool battery_measure_cell_voltages() {
