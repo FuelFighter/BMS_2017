@@ -17,6 +17,7 @@ typedef enum {
 	STATE_ERROR
 } fsm_state_t;
 
+void fsm_init();
 
 void fsm_update();
 

@@ -67,7 +67,7 @@ static int16_t battery_convert_temperature(uint16_t val) {
 }
 
 static int16_t battery_convert_current(uint16_t val) {
-	return (val - 25000) / 40;
+	return (-25000L + val) / 40;
 }
 
 bool battery_measure_cell_voltages() {

@@ -40,11 +40,15 @@ static void set_state(fsm_state_t new_state) {
 	fsm_state = new_state;
 }
 
+void fsm_init() {
+	set_state(STATE_IDLE);
+}
+
 void fsm_update() {
 	if (error_flags_is_critical()) {
 		set_state(STATE_ERROR);
 	}
-	
+
 	switch (fsm_state) {
 		case STATE_IDLE: {
 			if (!sdc_is_active()) {
@@ -59,6 +63,8 @@ void fsm_update() {
 			} else if (timer_elapsed_ms(PRECHARGE_TIMER) > LIMITS_PRECHARGE_TIME_MAX) {
 				error_flags_set(ERROR_FLAG_PRECHARGE_TIMEOUT);
 				set_state(STATE_ERROR);
+			} else if (sdc_is_active()) {
+				set_state(STATE_IDLE);
 			}
 			break;
 		}

@@ -9,12 +9,13 @@
 
 #include <avr/interrupt.h>
 
+#include "fsm.h"
 #include "BmsDrivers/hvm.h"
 #include "BmsDrivers/sdc_control.h"
 #include "BmsDrivers/led_indicator.h"
-#include "UniversalModuleDrivers/timer.h"
 #include "UniversalModuleDrivers/spi.h"
 #include "UniversalModuleDrivers/can.h"
+#include "UniversalModuleDrivers/timer.h"
 
 void hardware_init() {
 	
@@ -31,4 +32,6 @@ void hardware_init() {
 	led_indicator_init();
 	
 	sei();
+
+	fsm_init();
 }

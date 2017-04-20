@@ -64,9 +64,23 @@ void can_sender_send_data_messages() {
 	msg.data[2] = (uint8_t)(hvm_get_voltage() >> 8);
 	msg.data[3] = (uint8_t)(hvm_get_voltage() & 0x00FF);
 	can_send_message(&msg);
+}
 
-	msg.id = 0x500;
+void can_sender_send_debug(uint8_t value) {
+	CanMessage_t msg;
+
+	msg.id = CANID_BMS_DEBUG;
 	msg.length = 1;
-	msg.data[0] = PINB;
+	msg.data[0] = value;
+	can_send_message(&msg);
+}
+
+void can_sender_send_debug_16(uint16_t value) {
+	CanMessage_t msg;
+
+	msg.id = CANID_BMS_DEBUG;
+	msg.length = 2;
+	msg.data[0] = (uint8_t)(value >> 8);
+	msg.data[1] = (uint8_t)(value & 0x00FF);
 	can_send_message(&msg);
 }

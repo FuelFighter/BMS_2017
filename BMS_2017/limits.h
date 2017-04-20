@@ -12,8 +12,7 @@
 #define LIMITS_CELL_VOLTAGE_MAX 42000 // Unit: 100 µV
 #define LIMITS_CELL_VOLTAGE_MIN 31500 // Unit: 100 µV
 
-//#define LIMITS_TEMPERATURE_MAX 600 // Unit: 0.1 deg celcius
-#define LIMITS_TEMPERATURE_MAX 16000 // Unit: LSB
+#define LIMITS_TEMPERATURE_MAX 600 // Unit: 0.1 deg celcius
 
 #define LIMITS_CURRENT_MAX 500 // Unit: 0.1 A
 
