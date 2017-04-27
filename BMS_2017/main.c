@@ -30,6 +30,7 @@ int main(void)
 	hardware_init();
 
 	uint8_t lost_battery_data = 0;
+	uint8_t no_data_counter = 0;
 
     while (1) {
 		timer_start(MAIN_PERIOD_TIMER);
@@ -70,14 +71,20 @@ int main(void)
 
 		hvm_measure();
 		
-		fsm_update();
+		if (battery_has_data()) {
+			fsm_update();
+			can_sender_send_status_messages();
+			can_sender_send_data_messages();
+		} else {
+			no_data_counter++;
+			if (no_data_counter > LIMITS_MAX_STARTUP_NO_DATA) {				
+				error_flags_set(ERROR_FLAG_NO_DATA_ON_STARTUP);
+				sdc_open_relays();
+			}
+		}
 
 		led_indicator_update();
 		
-		can_sender_send_status_messages();
-
-		can_sender_send_data_messages();
-
 		while(timer_elapsed_ms(MAIN_PERIOD_TIMER) < MAIN_PERIOD_MS) { };
     }
 }

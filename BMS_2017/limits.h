@@ -22,4 +22,6 @@
 
 #define LIMITS_MAX_LOST_BATTERY_DATA 0
 
+#define LIMITS_MAX_STARTUP_NO_DATA 5
+
 #endif /* LIMITS_H_ */

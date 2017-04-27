@@ -43,4 +43,6 @@ bool battery_measure_temperature_and_current();
 
 bool battery_write_configuration();
 
+bool battery_has_data();
+
 #endif /* BATTERY_H_ */

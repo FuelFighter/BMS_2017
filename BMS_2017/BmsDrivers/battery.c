@@ -12,7 +12,8 @@
 
 
 battery_t battery_last_data;
-
+static bool has_cell_data = false;
+static bool has_aux_data = false;
 
 static void battery_update_cell_metadata() {
 	battery_last_data.total_voltage = 0;
@@ -116,6 +117,8 @@ bool battery_measure_cell_voltages() {
 	
 	battery_update_cell_metadata();
 
+	has_cell_data = true;
+
 	return true;
 }
 
@@ -154,6 +157,8 @@ bool battery_measure_temperature_and_current() {
 
 	battery_update_temperature_metadata();
 
+	has_aux_data = true;
+
 	return true;
 }
 
@@ -172,4 +177,8 @@ bool battery_write_configuration() {
 	}
 
 	return true;
+}
+
+bool battery_has_data() {
+	return has_aux_data && has_cell_data;
 }

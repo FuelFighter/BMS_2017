@@ -13,7 +13,7 @@
 #define COMMAND_LENGTH 2
 #define REGISTER_DATA_LENGTH 6
 #define PEC_LENGTH 2
-#define T_WAKE_US 300
+#define T_WAKE_US 3000
 
 
 #define DUMMY_BYTE 0xA5
