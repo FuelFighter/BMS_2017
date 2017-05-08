@@ -222,12 +222,6 @@
     <Compile Include="UniversalModuleDrivers\can.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="UniversalModuleDrivers\pid.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="UniversalModuleDrivers\pid.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="UniversalModuleDrivers\pwm.c">
       <SubType>compile</SubType>
     </Compile>
