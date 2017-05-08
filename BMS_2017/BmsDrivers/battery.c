@@ -12,6 +12,7 @@
 
 
 battery_t battery_last_data;
+static uint16_t discharging_cells = 0x000;
 static bool has_cell_data = false;
 static bool has_aux_data = false;
 
@@ -106,9 +107,13 @@ bool battery_measure_cell_voltages() {
 		if (error != NO_ERROR) {
 			lost_registers++;
 		} else {
-			battery_last_data.cell_voltage[0 + 3 * reg] = received_data.cv.cellVoltage0_3_6_9;
-			battery_last_data.cell_voltage[1 + 3 * reg] = received_data.cv.cellVoltage1_4_7_10;
-			battery_last_data.cell_voltage[2 + 3 * reg] = received_data.cv.cellVoltage2_5_8_11;
+			// Update voltages in last_data that are not currently discharging
+			if (!(discharging_cells & (1 << (0 + 3 * reg))))
+				battery_last_data.cell_voltage[0 + 3 * reg] = received_data.cv.cellVoltage0_3_6_9;
+			if (!(discharging_cells & (1 << (1 + 3 * reg))))
+				battery_last_data.cell_voltage[1 + 3 * reg] = received_data.cv.cellVoltage1_4_7_10;
+			if (!(discharging_cells & (1 << (1 + 3 * reg))))
+				battery_last_data.cell_voltage[2 + 3 * reg] = received_data.cv.cellVoltage2_5_8_11;
 		}
 	}
 
@@ -162,13 +167,15 @@ bool battery_measure_temperature_and_current() {
 	return true;
 }
 
-bool battery_write_configuration() {
+bool battery_write_configuration(uint16_t cells_to_discharge) {
 	ltc_ErrorCode_t error;
+
+	discharging_cells = cells_to_discharge;
 
 	ltc_RegisterData_t config_data;
 	config_data.config.dischargeTimeout = DischargeTimeout_DISABLED;
-	config_data.config.dischargeEnable_bf = 0;
-	config_data.config.gpioValu = 0x1F;
+	config_data.config.dischargeEnable_bf = discharging_cells & 0xFFF;
+	config_data.config.gpioValue = 0x1F;
 	config_data.config.refon = 1;
 	config_data.config.swtrd = 1;
 	error = ltc_writeConfigurationRegister(&config_data);

@@ -86,7 +86,7 @@ typedef union {
 		uint8_t adcModeOpt			: 1;
 		uint8_t swtrd				: 1;
 		uint8_t refon				: 1;
-		uint8_t gpioValu			: 5;
+		uint8_t gpioValue			: 5;
 		uint8_t UNUSED1				: 8;
 		uint16_t UNUSED2			: 16;
 		uint16_t dischargeEnable_bf	: 12;

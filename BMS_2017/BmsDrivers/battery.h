@@ -41,7 +41,7 @@ bool battery_measure_cell_voltages();
 
 bool battery_measure_temperature_and_current();
 
-bool battery_write_configuration();
+bool battery_write_configuration(uint16_t cells_to_discharge);
 
 bool battery_has_data();
 

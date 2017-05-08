@@ -35,7 +35,7 @@ int main(void)
     while (1) {
 		timer_start(MAIN_PERIOD_TIMER);
 
-		bool ltc6804_com_ok = battery_write_configuration();
+		bool ltc6804_com_ok = battery_write_configuration(0x000);
 		if (!ltc6804_com_ok) lost_battery_data++;
 
 		ltc6804_com_ok = battery_measure_cell_voltages();
