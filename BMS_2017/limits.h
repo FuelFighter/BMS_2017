@@ -14,7 +14,7 @@
 
 #define LIMITS_TEMPERATURE_MAX 600 // Unit: 0.1 deg celcius
 
-#define LIMITS_CURRENT_MAX 500 // Unit: 0.1 A
+#define LIMITS_CURRENT_MAX 30000 // Unit: mA
 
 #define LIMITS_PRECHARGE_TIME_MAX 5000 // ms
 #define LIMITS_PRECHARGE_TIME_MIN 1500 // ms

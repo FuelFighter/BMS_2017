@@ -10,7 +10,6 @@
 
 #include <util/delay.h>
 
-
 battery_t battery_last_data;
 static uint16_t discharging_cells = 0x000;
 static bool has_cell_data = false;
@@ -68,18 +67,12 @@ static int16_t battery_convert_temperature(uint16_t val) {
 	return (int16_t)((x * ((x * (((x * -1092) / 1000) + 53300)) / 100000 - 12000)) / 100000 + 1219);
 }
 
-static bool current_measurement_bias_is_set = false;
-static int16_t current_measurement_bias;
+#define CURRENT_BIAS -1200 // mA
 
 static int16_t battery_convert_current(uint16_t val) {
-	int16_t converted_value = (-25000L + val) / 40;
-	
-	if (!current_measurement_bias_is_set) {
-		current_measurement_bias = converted_value;
-		current_measurement_bias_is_set = true;
-	}
+	volatile int16_t converted_value = 10L * ((int32_t)val - 25000) / -4;
 
-	return converted_value - current_measurement_bias;
+	return converted_value + CURRENT_BIAS;
 }
 
 bool battery_measure_cell_voltages() {

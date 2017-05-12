@@ -14,7 +14,7 @@
 static uint16_t latest_value = 0;
 
 static uint16_t hvm_convert_voltage(uint16_t val) {
-	return 7982UL * val / 10000;
+	return 7982UL * val / 100;
 }
 
 void hvm_init() {
