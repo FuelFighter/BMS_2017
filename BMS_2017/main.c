@@ -71,11 +71,11 @@ int main(void)
 
 		hvm_measure();
 		
-		if (battery_has_data()) {
-			fsm_update();
-			can_sender_send_status_messages();
-			can_sender_send_data_messages();
-		} else {
+		fsm_update();
+		can_sender_send_status_messages();
+		can_sender_send_data_messages();
+		
+		if (!battery_has_data()) {
 			no_data_counter++;
 			if (no_data_counter > LIMITS_MAX_STARTUP_NO_DATA) {				
 				error_flags_set(ERROR_FLAG_NO_DATA_ON_STARTUP);
