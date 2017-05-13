@@ -9,7 +9,7 @@
 #ifndef LIMITS_H_
 #define LIMITS_H_
 
-#define LIMITS_CELL_VOLTAGE_MAX 42000 // Unit: 100 µV
+#define LIMITS_CELL_VOLTAGE_MAX 42100 // Unit: 100 µV
 #define LIMITS_CELL_VOLTAGE_MIN 31500 // Unit: 100 µV
 
 #define LIMITS_TEMPERATURE_MAX 600 // Unit: 0.1 deg celcius
