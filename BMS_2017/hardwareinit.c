@@ -13,6 +13,7 @@
 #include "BmsDrivers/hvm.h"
 #include "BmsDrivers/sdc_control.h"
 #include "BmsDrivers/led_indicator.h"
+#include "BmsDrivers/dcdc_output_control.h"
 #include "UniversalModuleDrivers/spi.h"
 #include "UniversalModuleDrivers/can.h"
 #include "UniversalModuleDrivers/timer.h"
@@ -31,6 +32,8 @@ void hardware_init() {
 
 	led_indicator_init();
 	
+	dcdc_output_init();
+
 	sei();
 
 	fsm_init();

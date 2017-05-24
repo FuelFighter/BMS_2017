@@ -22,6 +22,7 @@ void led_indicator_update() {
 		led_on = false;
 	} else {
 		switch(fsm_get_current_state()) {
+			case STATE_STARTUP: rgbled_turn_on(LED_BLUE | LED_GREEN); break;
 			case STATE_IDLE: rgbled_turn_on(LED_BLUE); break;
 			case STATE_PRECHARGING: rgbled_turn_on(LED_GREEN | LED_RED); break;
 			case STATE_BATTERY_ACTIVE: rgbled_turn_on(LED_GREEN); break;

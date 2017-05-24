@@ -11,6 +11,7 @@
 #include "BmsDrivers/hvm.h"
 #include "BmsDrivers/battery.h"
 #include "BmsDrivers/sdc_control.h"
+#include "BmsDrivers/dcdc_output_control.h"
 #include "UniversalModuleDrivers/timer.h"
 
 
@@ -19,8 +20,13 @@
 static fsm_state_t fsm_state;
 
 static void set_state(fsm_state_t new_state) {
+	if (new_state == STATE_IDLE) {
+		dcdc_output_enable();
+	}
+
 	if (new_state == STATE_ERROR) {
 		sdc_open_relays();
+		dcdc_output_disable();
 	}
 
 	if (new_state == STATE_IDLE) {
@@ -41,7 +47,7 @@ static void set_state(fsm_state_t new_state) {
 }
 
 void fsm_init() {
-	set_state(STATE_IDLE);
+	set_state(STATE_STARTUP);
 }
 
 void fsm_update() {
@@ -50,6 +56,11 @@ void fsm_update() {
 	}
 
 	switch (fsm_state) {
+		case STATE_STARTUP:
+			if (battery_has_data()) {
+				set_state(STATE_IDLE);
+			}
+		
 		case STATE_IDLE: {
 			if (!sdc_is_active()) {
 				set_state(STATE_PRECHARGING);
