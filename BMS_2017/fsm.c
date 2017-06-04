@@ -68,8 +68,14 @@ void fsm_update() {
 			break;
 		}
 		case STATE_PRECHARGING: {
+			volatile uint16_t elapsed = timer_elapsed_ms(PRECHARGE_TIMER);
+			volatile uint16_t voltage = hvm_get_voltage();
+			(void)elapsed;
+			(void)voltage;
+
+
 			if (timer_elapsed_ms(PRECHARGE_TIMER) > LIMITS_PRECHARGE_TIME_MIN && 
-				hvm_get_voltage() * 100 > battery_last_data.total_voltage * LIMITS_PRECHARGE_RATIO_MIN) {
+				hvm_get_voltage() > battery_last_data.total_voltage / 100 * LIMITS_PRECHARGE_RATIO_MIN) {
 				set_state(STATE_BATTERY_ACTIVE);
 			} else if (timer_elapsed_ms(PRECHARGE_TIMER) > LIMITS_PRECHARGE_TIME_MAX) {
 				error_flags_set(ERROR_FLAG_PRECHARGE_TIMEOUT);

@@ -31,6 +31,7 @@ int main(void)
 
 	uint8_t lost_battery_data = 0;
 	uint8_t no_data_counter = 0;
+	uint8_t consecutive_overcurrents = 0;
 
     while (1) {
 		timer_start(MAIN_PERIOD_TIMER);
@@ -58,8 +59,14 @@ int main(void)
 			sdc_open_relays();
 		}
 		if (ltc6804_com_ok && ((battery_last_data.current > LIMITS_CURRENT_MAX) || (battery_last_data.current < -LIMITS_CURRENT_MAX))) {
-			error_flags_set(ERROR_FLAG_OVERCURRENT);
-			sdc_open_relays();
+			consecutive_overcurrents++;
+			
+			if (consecutive_overcurrents >= 5) {
+				error_flags_set(ERROR_FLAG_OVERCURRENT);
+				sdc_open_relays();
+			}
+		} else {
+			consecutive_overcurrents = 0;
 		}
 
 		if (lost_battery_data > LIMITS_MAX_LOST_BATTERY_DATA) {
